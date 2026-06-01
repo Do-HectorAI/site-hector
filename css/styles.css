@@ -36,9 +36,9 @@
   --color-inverse-text: #ffffff;  /* Texte sur fond sombre */
 
   /* --- Polices ---
-     "Cabinet" pour les titres, "Satoshi" pour le corps de texte.
+     "Cabinet Grotesk" pour les titres, "Satoshi" pour le corps de texte.
      Les deux sont chargées via Fontshare (voir le <link> dans le <head>). */
-  --font-title: "Cabinet", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-title: "Cabinet Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* --- Graisses de police --- */
