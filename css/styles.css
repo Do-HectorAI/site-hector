@@ -43,7 +43,7 @@
 
   /* --- Graisses de police --- */
   --weight-body: 500;   /* Satoshi Medium */
-  --weight-title: 500;  /* Cabinet Regular */
+  --weight-title: 400;  /* Cabinet Regular */
 
   /* --- Échelle d'espacements (multiples cohérents) --- */
   --space-xs: 0.5rem;   /*  8px */
