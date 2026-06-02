@@ -1163,3 +1163,17 @@ button:focus-visible {
     justify-content: center;
   }
 }
+.legal-content {
+  max-width: 760px;      /* limite la largeur pour une lecture confortable */
+  margin: 0 auto;        /* centre le bloc */
+  padding: 2rem 1.5rem;
+  text-align: justify;   /* texte justifié */
+  hyphens: auto;         /* coupe les mots pour éviter les gros trous */
+}
+.legal-content h2 {
+  margin: 2.5rem 0 1rem; /* espace au-dessus et en dessous des titres */
+}
+.legal-content p {
+  line-height: 1.75;     /* aère les lignes */
+  margin-bottom: 1.25rem;/* espace entre les paragraphes */
+}
