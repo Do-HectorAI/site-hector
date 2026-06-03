@@ -515,6 +515,7 @@ button:focus-visible {
 
 .hero h1 {
   font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 700;
   margin-bottom: var(--space-md);
 }
 
@@ -584,6 +585,8 @@ button:focus-visible {
 /* --- Chiffres clés (3 colonnes) --- */
 .stats {
   border-block: 1px solid var(--color-border);
+  /* Un peu plus d'air au-dessus et en dessous des chiffres */
+  padding-block: calc(var(--space-xl) + var(--space-md));
 }
 .stats-grid {
   display: grid;
@@ -593,7 +596,7 @@ button:focus-visible {
 }
 .stat-number {
   font-family: var(--font-title);
-  font-weight: var(--weight-title);
+  font-weight: 700;
   font-size: clamp(3rem, 6vw, 4.5rem);
   line-height: 1;
   margin-bottom: var(--space-xs);
@@ -604,6 +607,10 @@ button:focus-visible {
 }
 
 /* --- Section fonctionnalités (onglets) --- */
+/* Titre "Deux outils, une seule plateforme." en gras */
+.features .section-head h2 {
+  font-weight: 700;
+}
 .features .tabs {
   display: flex;
   justify-content: center;
