@@ -607,10 +607,6 @@ button:focus-visible {
 }
 
 /* --- Section fonctionnalités (onglets) --- */
-/* Titre "Deux outils, une seule plateforme." en gras */
-.features .section-head h2 {
-  font-weight: 700;
-}
 .features .tabs {
   display: flex;
   justify-content: center;
