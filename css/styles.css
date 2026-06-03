@@ -779,6 +779,36 @@ button:focus-visible {
   font-size: 0.95rem;
 }
 
+/* Sur les appareils avec souris : on n'affiche que le titre (plus grand),
+   et au survol le titre laisse place à l'explication (fondu enchaîné).
+   Sur tactile (pas de :hover), les cartes gardent titre + explication. */
+@media (hover: hover) {
+  .security-card {
+    display: grid;
+    align-items: center;      /* titre et explication centrés verticalement */
+    min-height: 140px;        /* hauteur stable, évite les cartes trop plates */
+  }
+  /* On empile le titre et l'explication dans la même cellule */
+  .security-card h3,
+  .security-card p {
+    grid-area: 1 / 1;
+    transition: opacity var(--transition-fast);
+  }
+  .security-card h3 {
+    font-size: 1.5rem;        /* titre plus grand au repos */
+    margin-bottom: 0;
+  }
+  .security-card p {
+    opacity: 0;               /* explication masquée au repos */
+  }
+  .security-card:hover h3 {
+    opacity: 0;               /* le titre s'efface au survol */
+  }
+  .security-card:hover p {
+    opacity: 1;               /* l'explication apparaît au survol */
+  }
+}
+
 
 /* ==========================================================================
    10. APPEL À L'ACTION FINAL (CTA)
