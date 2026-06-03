@@ -810,6 +810,25 @@ button:focus-visible {
 }
 
 
+/* --- Section vidéo de démonstration (accueil) --- */
+.video-demo-frame {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  box-shadow: 0 20px 60px rgba(10, 10, 10, 0.12);
+}
+.video-demo-frame video {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;       /* cadre stable avant le chargement de la vidéo */
+  background: #000;
+}
+
+
 /* ==========================================================================
    10. APPEL À L'ACTION FINAL (CTA)
    ========================================================================== */
