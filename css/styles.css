@@ -1185,29 +1185,32 @@ button:focus-visible {
 }
 
 /* --- Tableaux dans le contenu juridique --- */
-  .legal-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--space-md) 0;
-    font-size: 0.95rem;
-  }
-  .legal-content th,
-  .legal-content td {
-    border: 1px solid var(--color-border);
-    padding: 0.75rem 1rem;
-    text-align: left;
-    vertical-align: top;
-  }
-  .legal-content thead th {
-    background: var(--color-bg-soft);
-    font-weight: 700;
-  }
-  /* Confort de lecture : lignes alternées */
-  .legal-content tbody tr:nth-child(even) {
-    background: var(--color-bg-soft);
-  }
-  /* Sur mobile : défilement horizontal si le tableau est large */
-  .legal-content .table-wrapper {
-    overflow-x: auto;
-  }
-
+.legal-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 0.95rem;
+  text-align: left;      /* annule le justify hérité, plus lisible en tableau */
+}
+.legal-content th,
+.legal-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+.legal-content thead th {
+  background: var(--color-bg-soft);
+  font-weight: 700;      /* en-tête en gras */
+}
+.legal-content tbody tr:nth-child(even) {
+  background: var(--color-bg-soft);  /* lignes alternées */
+}
+.legal-content td ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+/* Sur mobile : défilement horizontal si le tableau est large */
+.legal-content .table-wrapper {
+  overflow-x: auto;
+}
