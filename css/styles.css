@@ -109,6 +109,12 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
 }
 
+/* Titres <h2> en gras sur les pages juridiques + FAQ
+   (la graisse 700 de Cabinet Grotesk est chargée dans le <head> de ces pages) */
+.titres-gras h2 {
+  font-weight: 700;
+}
+
 a {
   color: inherit;
   text-decoration: none;
