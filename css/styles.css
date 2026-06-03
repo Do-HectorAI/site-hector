@@ -1183,3 +1183,31 @@ button:focus-visible {
   line-height: 1.75;     /* aère les lignes */
   margin-bottom: 1.25rem;/* espace entre les paragraphes */
 }
+
+/* --- Tableaux dans le contenu juridique --- */
+  .legal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-md) 0;
+    font-size: 0.95rem;
+  }
+  .legal-content th,
+  .legal-content td {
+    border: 1px solid var(--color-border);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .legal-content thead th {
+    background: var(--color-bg-soft);
+    font-weight: 700;
+  }
+  /* Confort de lecture : lignes alternées */
+  .legal-content tbody tr:nth-child(even) {
+    background: var(--color-bg-soft);
+  }
+  /* Sur mobile : défilement horizontal si le tableau est large */
+  .legal-content .table-wrapper {
+    overflow-x: auto;
+  }
+
