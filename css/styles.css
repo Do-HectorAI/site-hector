@@ -709,6 +709,16 @@ button:focus-visible {
   padding: var(--space-md);
 }
 
+/* --- Image ou vidéo occupant l'emplacement visuel d'un onglet --- */
+.feature-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;       /* même cadre que le placeholder remplacé */
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
+
 
 /* ==========================================================================
    9. SECTION SÉCURITÉ & CONFIDENTIALITÉ
@@ -807,25 +817,6 @@ button:focus-visible {
   .security-card:hover p {
     opacity: 1;               /* l'explication apparaît au survol */
   }
-}
-
-
-/* --- Section vidéo de démonstration (accueil) --- */
-.video-demo-frame {
-  max-width: 900px;
-  margin: 0 auto;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-soft);
-  box-shadow: 0 20px 60px rgba(10, 10, 10, 0.12);
-}
-.video-demo-frame video {
-  width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 16 / 9;       /* cadre stable avant le chargement de la vidéo */
-  background: #000;
 }
 
 
