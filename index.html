@@ -58,20 +58,13 @@
     <section class="hero">
       <!-- Média de fond -->
       <div class="hero-media">
-        <!-- PHOTO de fond. Déposez votre image dans assets/img/hero.jpg -->
-        <img src="assets/img/hero.jpg" alt="" />
-
-        <!--
-          POUR UTILISER UNE VIDÉO À LA PLACE DE LA PHOTO :
-          1. Déposez votre vidéo dans assets/video/hero.mp4
-          2. Supprimez (ou commentez) la balise <img> ci-dessus
-          3. Décommentez la balise <video> ci-dessous
-          La vidéo se lance automatiquement, en boucle, sans son.
-
-          <video autoplay muted loop playsinline poster="assets/img/hero.jpg">
-            <source src="assets/video/hero.mp4" type="video/mp4" />
-          </video>
-        -->
+        <!-- VIDÉO de fond : lecture automatique, en boucle, sans son.
+             L'image hero.jpg sert d'aperçu (poster) le temps du chargement.
+             Pour revenir à une image fixe, remplacer ce <video> par :
+             <img src="assets/img/hero.jpg" alt="" /> -->
+        <video autoplay muted loop playsinline poster="assets/img/hero.jpg">
+          <source src="assets/video/hero.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <!-- (a) Couche "grain de film" -->
