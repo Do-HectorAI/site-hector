@@ -597,9 +597,12 @@ button:focus-visible {
 .stat-number {
   font-family: var(--font-title);
   font-weight: 700;
-  font-size: clamp(3rem, 6vw, 4.5rem);
+  /* Taille un peu réduite et limitée pour que « + de 270 000 » tienne en entier */
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
   line-height: 1;
   margin-bottom: var(--space-xs);
+  /* Empêche le chiffre d'être coupé sur deux lignes */
+  white-space: nowrap;
 }
 .stat-label {
   color: var(--color-text-muted);
