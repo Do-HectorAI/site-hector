@@ -13,19 +13,17 @@
    ========================================================================== */
 
 const VIDEO_SOURCES = {
-  /* --- Axe 1 : Analyse de dossier --- */
-  "analyse-1": "", // Maîtrisez vos dossiers les plus volumineux
-  "analyse-2": "", // Reconstituez les faits et les parties
-  "analyse-3": "", // Tableau récapitulatif des pièces
-  "analyse-4": "", // Numérotez et tamponnez vos pièces
-  "analyse-5": "", // Répliquez point par point
-  "analyse-6": "", // Trouvez la jurisprudence
-  "analyse-7": "", // Centralisez et sécurisez vos dossiers
-
-  /* --- Axe 2 : Rédaction d'acte --- */
+  /* --- Axe 1 : Rédaction d'acte --- */
   "redaction-1": "", // Rédigez vos actes dans Word (inclut modèles + style)
   "redaction-2": "", // Plan détaillé de l'argumentation
   "redaction-3": "", // Enrichissez de la bonne jurisprudence
+  "redaction-4": "", // Numérotez et tamponnez vos pièces
+
+  /* --- Axe 2 : Analyse de dossier --- */
+  "analyse-1": "", // Maîtrisez vos dossiers les plus volumineux
+  "analyse-2": "", // Faits, parties et tableau des pièces (fusion)
+  "analyse-3": "", // Trouvez la jurisprudence
+  "analyse-4": "", // Centralisez et sécurisez vos dossiers
 };
 
 /* --------------------------------------------------------------------------
