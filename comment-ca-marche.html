@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comment ça marche — Hector AI</title>
-  <meta name="description" content="Découvrez comment Hector accompagne les avocats : analyse des dossiers et rédaction d'actes, en vidéo." />
+  <title>Comment fonctionne Hector — Analyse de dossier et rédaction d'acte</title>
+  <meta name="description" content="Découvrez comment Hector accompagne les avocats en contentieux : analyse de dossiers volumineux, frise des faits, tableau des pièces, recherche de jurisprudence, et rédaction d'actes directement dans Word." />
 
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400&f[]=satoshi@500&display=swap" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,700&f[]=satoshi@500&display=swap" />
+  <link rel="stylesheet" href="css/styles.css?v=5" />
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml" />
 </head>
 <body>
@@ -20,7 +20,7 @@
         <img src="assets/img/logo.svg" alt="Hector AI"
              onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<span class=\'logo-text\'>Hector</span>');" />
       </a>
-      <nav class="main-nav" aria-label="Navigation principale">
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
         <ul class="nav-links">
           <li><a href="comment-ca-marche.html">Comment ça marche ?</a></li>
           <li><a href="faq.html">FAQ</a></li>
@@ -29,7 +29,7 @@
         </ul>
         <a class="btn btn-primary" href="https://calendly.com/benoit_raillard/demo?month=2026-06" target="_blank" rel="noopener">Réserver une démo</a>
       </nav>
-      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -40,72 +40,277 @@
     <!-- En-tête de page -->
     <section class="page-hero">
       <div class="container">
-        <h1>Comment ça marche ? </h1>
+        <h1>Comment ça marche</h1>
         <p>
-          Hector s'intègre simplement à votre pratique du contentieux. Découvrez
-          ses deux fonctionnalités principales en action.
+          Hector couvre les deux grands besoins du contentieux : <strong>analyser
+          un dossier</strong> et <strong>rédiger un acte</strong>. Découvrez, étape
+          par étape, comment la plateforme vous fait gagner du temps sans jamais
+          vous déposséder de votre travail.
         </p>
       </div>
     </section>
 
-    <!-- Étapes / fonctionnalités avec vidéos de démo -->
-    <section class="section">
+    <!-- Navigation interne entre les deux axes -->
+    <section class="section" style="padding-top: 0;">
       <div class="container">
-
-        <!-- Étape 1 : Analyse des dossiers -->
-        <div class="howto-step" data-reveal>
-          <div class="howto-text">
-            <div class="step-number">01</div>
-            <h2>Analyse des dossiers</h2>
-            <p>
-              Importez les pièces de votre dossier : Hector en produit une
-              synthèse claire, identifie les parties et les moyens de droit,
-              puis recherche la jurisprudence pertinente. 
-               <br />
-              Vous gagnez des heures de lecture et entrez directement dans la stratégie.
-            </p>
-          </div>
-          <!--
-            VIDÉO DE DÉMO (lecture automatique, en boucle, sans son).
-            👉 Déposez votre vidéo dans : assets/video/demo-analyse.mp4
-            👉 (Optionnel) une image d'aperçu dans : assets/img/poster-analyse.jpg
-            La vidéo démarre seule, sans bouton "play", grâce aux attributs
-            autoplay muted loop playsinline.
-          -->
-          <video class="demo-video" autoplay muted loop playsinline
-                 poster="assets/img/poster-analyse.jpg">
-            <source src="assets/video/demo-analyse.mp4" type="video/mp4" />
-            Votre navigateur ne prend pas en charge la lecture vidéo.
-          </video>
-        </div>
-
-        <!-- Étape 2 : Rédaction d'actes -->
-        <div class="howto-step" data-reveal>
-          <div class="howto-text">
-            <div class="step-number">02</div>
-            <h2>Rédaction d'actes</h2>
-            <p>
-              À partir du dossier analysé, Hector génère un premier jet d'acte
-              dans votre style rédactionnel. Vous repartez d'une base solide, que vous gardez
-              entièrement sous votre contrôle pour la retravailler et la finaliser.
-            </p>
-          </div>
-          <!--
-            VIDÉO DE DÉMO.
-            👉 Déposez votre vidéo dans : assets/video/demo-redaction.mp4
-            👉 (Optionnel) image d'aperçu : assets/img/poster-redaction.jpg
-          -->
-          <video class="demo-video" autoplay muted loop playsinline
-                 poster="assets/img/poster-redaction.jpg">
-            <source src="assets/video/demo-redaction.mp4" type="video/mp4" />
-            Votre navigateur ne prend pas en charge la lecture vidéo.
-          </video>
-        </div>
-
+        <nav class="usecase-nav" aria-label="Aller à un axe">
+          <a href="#analyse">Analyser un dossier</a>
+          <a href="#redaction">Rédiger un acte</a>
+        </nav>
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ====================================================================
+         AXE 1 — ANALYSE DE DOSSIER
+         ==================================================================== -->
+    <section class="section" id="analyse" aria-labelledby="axe-analyse-titre">
+      <div class="container">
+        <div class="usecase-axis-head" data-reveal>
+          <span class="eyebrow">Axe 1 — Analyse de dossier</span>
+          <h2 id="axe-analyse-titre">Analyser un dossier</h2>
+          <p>De la lecture des pièces à la recherche de jurisprudence, Hector transforme un dossier volumineux en éléments directement exploitables.</p>
+        </div>
+
+        <div class="usecase-list">
+
+          <!-- 01 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-1" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : maîtrisez vos dossiers les plus volumineux">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">01</span>
+              <h3>Maîtrisez vos dossiers les plus volumineux</h3>
+              <p>Des milliers de pages avant une audience ? Hector lit l'intégralité du dossier — quelle que soit son épaisseur — et en extrait l'essentiel : prétentions, moyens, pièces clés et zones de risque. Vous passez directement du temps de lecture au temps de réflexion.</p>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-2" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : reconstituez les faits et les parties">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">02</span>
+              <h3>Reconstituez les faits et les parties en un coup d'œil</h3>
+              <p>Hector repère automatiquement les parties en présence et les faits déterminants, puis les ordonne dans une frise ou un tableau chronologique. La trame du litige devient lisible instantanément, prête à structurer votre stratégie.</p>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-3" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : visualisez vos pièces dans un tableau récapitulatif">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">03</span>
+              <h3>Visualisez toutes vos pièces dans un tableau récapitulatif</h3>
+              <p>Hector dresse un tableau récapitulatif clair de l'ensemble des pièces du dossier — les vôtres comme celles de la partie adverse — et les met en regard. D'un coup d'œil, vous savez quelle pièce répond à quel argument, et plus rien ne vous échappe.</p>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-4" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : numérotez et tamponnez vos pièces automatiquement">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">04</span>
+              <h3>Numérotez et tamponnez vos pièces automatiquement</h3>
+              <p>Plus besoin de traiter vos pièces une à une. Hector applique automatiquement le tampon de votre cabinet et la numérotation à l'ensemble du dossier. Votre dossier de plaidoirie est prêt en un instant.</p>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-5" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : répliquez point par point à la partie adverse">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">05</span>
+              <h3>Répliquez point par point à la partie adverse</h3>
+              <p>Déposez les conclusions adverses : Hector les décortique, identifie chaque moyen soulevé et vous propose une réponse argumentée, moyen par moyen. Vous ne laissez plus aucun argument sans réplique.</p>
+            </div>
+          </article>
+
+          <!-- 06 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-6" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : trouvez la jurisprudence qui fait la différence">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">06</span>
+              <h3>Trouvez la jurisprudence qui fait la différence</h3>
+              <p>Décrivez votre problématique en langage naturel : Hector recherche les décisions les plus pertinentes et vous renvoie des références fiables, sourcées et directement exploitables. La recherche juridique qui prenait des heures se fait en quelques minutes.</p>
+            </div>
+          </article>
+
+          <!-- 07 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="analyse-7" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : centralisez et sécurisez tous vos dossiers">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">07</span>
+              <h3>Centralisez et sécurisez tous vos dossiers</h3>
+              <p>Tous vos dossiers réunis au même endroit, organisés et accessibles en quelques secondes. Hector devient le coffre-fort de votre contentieux : vos pièces, vos analyses et vos actes, structurés et sécurisés.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         AXE 2 — RÉDACTION D'ACTE
+         ==================================================================== -->
+    <section class="section" id="redaction" aria-labelledby="axe-redaction-titre">
+      <div class="container">
+        <div class="usecase-axis-head" data-reveal>
+          <span class="eyebrow">Axe 2 — Rédaction d'acte</span>
+          <h2 id="axe-redaction-titre">Rédiger un acte</h2>
+          <p>Du plan détaillé à l'acte finalisé dans Word, Hector accélère la rédaction sans jamais vous déposséder de votre plume.</p>
+        </div>
+
+        <div class="usecase-list">
+
+          <!-- 01 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="redaction-1" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : rédigez tous vos actes directement dans Word">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">01</span>
+              <h3>Rédigez tous vos actes, directement dans Word</h3>
+              <p>Requête, assignation, conclusions, projet d'acte… Hector rédige vos écritures directement dans Word, l'outil que vous utilisez déjà. Aucune nouvelle interface à apprivoiser : vous restez dans votre environnement de travail.</p>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="redaction-2" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : obtenez un plan détaillé de votre argumentation">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">02</span>
+              <h3>Obtenez un plan détaillé de votre argumentation</h3>
+              <p>Avant de rédiger, posez les fondations. Hector génère un plan structuré et détaillé de vos moyens et arguments, que vous validez et ajustez. Vous gagnez en clarté et ne partez jamais d'une page blanche.</p>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="redaction-3" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : enrichissez vos actes de la bonne jurisprudence">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">03</span>
+              <h3>Enrichissez vos actes de la bonne jurisprudence</h3>
+              <p>Pendant la rédaction, Hector identifie et insère les décisions qui viennent étayer chacun de vos arguments. Vos écritures gagnent en force de conviction, références à l'appui.</p>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="redaction-4" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : gardez la main sur chaque mot">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">04</span>
+              <h3>Gardez la main sur chaque mot</h3>
+              <p>Hector propose, vous décidez. Chaque phrase reste modifiable, chaque suggestion est sous votre contrôle. L'acte final, c'est le vôtre — Hector accélère sans jamais vous déposséder de votre plume.</p>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="usecase" data-reveal>
+            <div class="usecase-media">
+              <div class="usecase-video" data-video-id="redaction-5" data-poster=""
+                   role="img" aria-label="Démonstration vidéo : Hector épouse votre style et vos modèles">
+                <div class="video-placeholder" aria-hidden="true">
+                  <span class="play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span>Vidéo à venir</span>
+                </div>
+              </div>
+            </div>
+            <div class="usecase-body">
+              <span class="usecase-number">05</span>
+              <h3>Hector épouse votre style et vos modèles</h3>
+              <p>Déposez vos propres modèles d'actes : Hector apprend votre style rédactionnel et la structure de vos écritures. Pour vos contentieux récurrents, il génère ensuite des actes prêts à l'emploi, fidèles à vos habitudes et à votre signature.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA final -->
     <section class="section cta">
       <div class="container" data-reveal>
         <h2>Envie de voir Hector sur vos dossiers ?</h2>
@@ -154,6 +359,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
+  <script src="js/usecases.js?v=1"></script>
 </body>
 </html>

@@ -1,0 +1,70 @@
+/* ==========================================================================
+   HECTOR AI — Vidéos des cas d'usage ("Comment ça marche")
+   --------------------------------------------------------------------------
+   👉 POUR BRANCHER UNE VRAIE VIDÉO : renseignez son URL .mp4 ci-dessous, à la
+      ligne correspondant au cas d'usage. C'est le SEUL endroit à modifier.
+      - Laissez "" tant que la vidéo n'est pas prête → un placeholder
+        "Vidéo à venir" s'affiche automatiquement.
+      - Vous pouvez aussi indiquer une image d'aperçu (poster) en option, via
+        l'attribut data-poster directement dans le HTML de la page.
+
+   Exemple :
+      "analyse-1": "assets/video/usecase-analyse-1.mp4",
+   ========================================================================== */
+
+const VIDEO_SOURCES = {
+  /* --- Axe 1 : Analyse de dossier --- */
+  "analyse-1": "", // Maîtrisez vos dossiers les plus volumineux
+  "analyse-2": "", // Reconstituez les faits et les parties
+  "analyse-3": "", // Tableau récapitulatif des pièces
+  "analyse-4": "", // Numérotez et tamponnez vos pièces
+  "analyse-5": "", // Répliquez point par point
+  "analyse-6": "", // Trouvez la jurisprudence
+  "analyse-7": "", // Centralisez et sécurisez vos dossiers
+
+  /* --- Axe 2 : Rédaction d'acte --- */
+  "redaction-1": "", // Rédigez vos actes dans Word
+  "redaction-2": "", // Plan détaillé de l'argumentation
+  "redaction-3": "", // Enrichissez de la bonne jurisprudence
+  "redaction-4": "", // Gardez la main sur chaque mot
+  "redaction-5": "", // Hector épouse votre style
+};
+
+/* --------------------------------------------------------------------------
+   Au chargement : pour chaque cadre vidéo (élément [data-video-id]), si une
+   URL est renseignée ci-dessus, on remplace le placeholder par une vraie
+   vidéo en lecture automatique, en boucle et sans son. Sinon, on ne touche à
+   rien : le placeholder "Vidéo à venir" reste affiché.
+   -------------------------------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", function () {
+  const frames = document.querySelectorAll("[data-video-id]");
+
+  frames.forEach(function (frame) {
+    const id = frame.getAttribute("data-video-id");
+    const src = VIDEO_SOURCES[id];
+
+    // Pas d'URL pour ce cas → on garde le placeholder.
+    if (!src) return;
+
+    const poster = frame.getAttribute("data-poster") || "";
+    const label = frame.getAttribute("aria-label") || "";
+
+    // Construit la balise <video> (lecture auto, muette, en boucle).
+    const video = document.createElement("video");
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true; // évite le plein écran forcé sur iOS
+    if (poster) video.poster = poster;
+    if (label) video.setAttribute("aria-label", label);
+
+    const source = document.createElement("source");
+    source.src = src;
+    source.type = "video/mp4";
+    video.appendChild(source);
+
+    // Remplace le contenu du cadre (placeholder) par la vidéo.
+    frame.innerHTML = "";
+    frame.appendChild(video);
+  });
+});
