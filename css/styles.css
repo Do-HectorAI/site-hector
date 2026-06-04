@@ -1104,6 +1104,37 @@ button:focus-visible {
   font-weight: 600;
 }
 
+/* Apparition "peu à peu" : chaque cas d'usage [data-reveal] sert de déclencheur,
+   et ses éléments internes apparaissent en cascade quand le bloc entre dans
+   l'écran — d'abord le visuel, puis le numéro, le titre et le paragraphe.
+   (Le JS ajoute .is-revealed via IntersectionObserver ; prefers-reduced-motion
+   est géré plus bas, dans la section 13.) */
+.usecase[data-reveal] {
+  opacity: 1;          /* le bloc lui-même ne fait que déclencher la cascade */
+  transform: none;
+}
+.usecase .usecase-media,
+.usecase .usecase-number,
+.usecase .usecase-body h3,
+.usecase .usecase-body p {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease,
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.usecase.is-revealed .usecase-media,
+.usecase.is-revealed .usecase-number,
+.usecase.is-revealed .usecase-body h3,
+.usecase.is-revealed .usecase-body p {
+  opacity: 1;
+  transform: none;
+}
+/* Décalages successifs pour l'effet "en cascade" */
+.usecase.is-revealed .usecase-media     { transition-delay: 0.04s; }
+.usecase.is-revealed .usecase-number    { transition-delay: 0.14s; }
+.usecase.is-revealed .usecase-body h3   { transition-delay: 0.22s; }
+.usecase.is-revealed .usecase-body p    { transition-delay: 0.30s; }
+
 /* Responsive : visuel et texte empilés (visuel au-dessus) */
 @media (max-width: 900px) {
   .usecase {
@@ -1276,6 +1307,14 @@ button:focus-visible {
     scroll-behavior: auto !important;
   }
   [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  /* Cascade des cas d'usage : on garde tout visible, sans animation */
+  .usecase .usecase-media,
+  .usecase .usecase-number,
+  .usecase .usecase-body h3,
+  .usecase .usecase-body p {
     opacity: 1;
     transform: none;
   }

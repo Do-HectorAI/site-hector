@@ -23,11 +23,9 @@ const VIDEO_SOURCES = {
   "analyse-7": "", // Centralisez et sécurisez vos dossiers
 
   /* --- Axe 2 : Rédaction d'acte --- */
-  "redaction-1": "", // Rédigez vos actes dans Word
+  "redaction-1": "", // Rédigez vos actes dans Word (inclut modèles + style)
   "redaction-2": "", // Plan détaillé de l'argumentation
   "redaction-3": "", // Enrichissez de la bonne jurisprudence
-  "redaction-4": "", // Gardez la main sur chaque mot
-  "redaction-5": "", // Hector épouse votre style
 };
 
 /* --------------------------------------------------------------------------
