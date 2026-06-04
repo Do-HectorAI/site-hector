@@ -299,10 +299,12 @@ button:focus-visible {
    sur la vidéo. Une fois le hero dépassé, il redevient le header blanc normal.
    -------------------------------------------------------------------------- */
 .site-header--transparent:not(.is-scrolled) {
-  background-color: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border-bottom-color: transparent;
+  /* Effet « verre dépoli » : fond très légèrement teinté + flou de l'arrière-plan.
+     La vidéo reste visible derrière, mais le bandeau garde sa présence. */
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: rgba(255, 255, 255, 0.18);
   box-shadow: none;
 }
 /* Logo et barres du hamburger en blanc sur la vidéo (mobile inclus) */
