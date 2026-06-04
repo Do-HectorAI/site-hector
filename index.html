@@ -11,8 +11,11 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,700&f[]=satoshi@500&display=swap" />
 
-  <!-- Feuille de styles unique du site -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Feuille de styles unique du site.
+       Le "?v=2" force le navigateur à recharger le CSS après une mise à jour
+       (évite qu'une ancienne version reste en cache). Incrémentez ce numéro
+       (v=3, v=4...) à chaque fois que vous modifiez css/styles.css. -->
+  <link rel="stylesheet" href="css/styles.css?v=2" />
 
   <!-- Favicon (remplaçable par votre propre icône) -->
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml" />
