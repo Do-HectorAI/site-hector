@@ -24,8 +24,9 @@ const VIDEO_SOURCES = {
   "analyse-3": "", // Trouvez la jurisprudence
 
   /* --- Axe 3 : Gestion du contentieux --- */
-  "gestion-1": "", // Numérotez et tamponnez vos pièces
-  "gestion-2": "", // Centralisez et sécurisez vos dossiers
+  "gestion-1": "", // Structurez votre dossier (renommage auto + scission)
+  "gestion-2": "", // Numérotez et tamponnez vos pièces
+  "gestion-3": "", // Centralisez et sécurisez vos dossiers
 };
 
 /* --------------------------------------------------------------------------
