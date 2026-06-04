@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initFaqAccordion();
   initScrollReveal();
   initSmoothAnchors();
+  initCountUp();
 });
 
 
@@ -232,5 +233,95 @@ function initSmoothAnchors() {
       e.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  });
+}
+
+
+/* --------------------------------------------------------------------------
+   7. CHIFFRES QUI "GRIMPENT" (compteur animé)
+   Chaque élément [data-count-to] voit son nombre grimper de 0 jusqu'à la
+   valeur cible quand il entre dans l'écran. Le préfixe (ex. "+ de ") et le
+   suffixe (ex. " h") sont conservés via data-prefix / data-suffix.
+   On respecte prefers-reduced-motion : si l'utilisateur préfère limiter les
+   animations, le chiffre final s'affiche directement, sans comptage.
+   -------------------------------------------------------------------------- */
+function initCountUp() {
+  const counters = document.querySelectorAll("[data-count-to]");
+  if (counters.length === 0) return;
+
+  // L'utilisateur préfère-t-il réduire les animations ?
+  const prefersReduced =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Formate un nombre à la française : séparateur de milliers = espace.
+  function format(n) {
+    return Math.round(n).toLocaleString("fr-FR");
+  }
+
+  // Écrit la valeur dans l'élément, entourée du préfixe et du suffixe.
+  function render(el, value) {
+    const prefix = el.getAttribute("data-prefix") || "";
+    const suffix = el.getAttribute("data-suffix") || "";
+    el.textContent = prefix + format(value) + suffix;
+  }
+
+  // Anime un compteur de 0 jusqu'à sa valeur cible.
+  function animate(el) {
+    const target = parseInt(el.getAttribute("data-count-to"), 10) || 0;
+
+    // Accessibilité : pas d'animation → on affiche directement le résultat.
+    if (prefersReduced) {
+      render(el, target);
+      return;
+    }
+
+    const duration = 1600; // durée du comptage en millisecondes
+    let startTime = null;
+
+    function step(timestamp) {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      // Courbe "ease-out" : rapide au début, ralentit en fin de course.
+      const eased = 1 - Math.pow(1 - progress, 3);
+      render(el, target * eased);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        render(el, target); // garantit la valeur finale exacte
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // Repli : sans IntersectionObserver, on anime tout de suite.
+  if (!("IntersectionObserver" in window)) {
+    counters.forEach(animate);
+    return;
+  }
+
+  // On part de 0 à l'affichage (sauf en mode "mouvement réduit").
+  if (!prefersReduced) {
+    counters.forEach(function (el) {
+      render(el, 0);
+    });
+  }
+
+  // Déclenche le comptage quand le chiffre entre dans l'écran (une seule fois).
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  counters.forEach(function (el) {
+    observer.observe(el);
   });
 }

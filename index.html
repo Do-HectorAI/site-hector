@@ -127,16 +127,18 @@
     <section class="section stats">
       <div class="container">
         <div class="stats-grid">
+          <!-- Les chiffres "grimpent" de 0 jusqu'à data-count-to au scroll (voir main.js).
+               data-prefix / data-suffix encadrent le nombre animé. -->
           <div data-reveal>
-            <div class="stat-number">+ de 6 h</div>
+            <div class="stat-number" data-count-to="6" data-prefix="+ de " data-suffix=" h">+ de 6 h</div>
             <div class="stat-label">gagnées par semaine</div>
           </div>
           <div data-reveal>
-            <div class="stat-number">+ de 300</div>
+            <div class="stat-number" data-count-to="300" data-prefix="+ de ">+ de 300</div>
             <div class="stat-label">cabinets accompagnés</div>
           </div>
           <div data-reveal>
-            <div class="stat-number">+ de 270 000</div>
+            <div class="stat-number" data-count-to="270000" data-prefix="+ de ">+ de 270 000</div>
             <div class="stat-label">actes rédigés</div>
           </div>
         </div>
@@ -173,20 +175,6 @@
                 Synthèse automatique des pièces, identification des parties et
                 des moyens de droit, recherche de la jurisprudence pertinente.
               </p>
-              <div class="feature-subblocks">
-                <div class="feature-subblock">
-                  <h4>Synthèse</h4>
-                  <p>Résumé clair et structuré des pièces et faits du dossier.</p>
-                </div>
-                <div class="feature-subblock">
-                  <h4>Parties &amp; moyens de droit</h4>
-                  <p>Identification automatique des parties et des moyens soulevés.</p>
-                </div>
-                <div class="feature-subblock">
-                  <h4>Recherche de jurisprudence</h4>
-                  <p>Mise en regard avec la jurisprudence française pertinente.</p>
-                </div>
-              </div>
             </div>
             <!-- Zone visuelle : remplacez par une image ou une vidéo -->
             <div class="media-placeholder">
@@ -204,20 +192,6 @@
                 Des premiers jets d'actes générés à partir de votre dossier,
                 dans votre style, prêts à être retravaillés.
               </p>
-              <div class="feature-subblocks">
-                <div class="feature-subblock">
-                  <h4>Premiers jets</h4>
-                  <p>Génération d'une première version de l'acte à partir du dossier.</p>
-                </div>
-                <div class="feature-subblock">
-                  <h4>Votre style</h4>
-                  <p>Le rendu s'adapte à vos habitudes de rédaction.</p>
-                </div>
-                <div class="feature-subblock">
-                  <h4>Prêt à retravailler</h4>
-                  <p>Un point de départ solide, que vous gardez sous contrôle.</p>
-                </div>
-              </div>
             </div>
             <!-- Zone visuelle : vidéo de démonstration de la rédaction d'actes -->
             <video class="feature-media" autoplay muted loop playsinline
@@ -345,6 +319,6 @@
   </footer>
 
   <!-- Script principal du site -->
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>
