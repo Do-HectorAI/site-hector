@@ -15,7 +15,7 @@
        Le "?v=2" force le navigateur à recharger le CSS après une mise à jour
        (évite qu'une ancienne version reste en cache). Incrémentez ce numéro
        (v=3, v=4...) à chaque fois que vous modifiez css/styles.css. -->
-  <link rel="stylesheet" href="css/styles.css?v=2" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
 
   <!-- Favicon (remplaçable par votre propre icône) -->
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml" />
@@ -25,7 +25,7 @@
   <!-- ====================================================================
        HEADER (en-tête fixe, identique sur toutes les pages)
        ==================================================================== -->
-  <header class="site-header">
+  <header class="site-header site-header--transparent">
     <div class="container header-inner">
       <!-- Logo à gauche. Déposez votre logo dans assets/img/logo.svg.
            Le texte de repli "Hector" s'affiche si l'image est absente. -->
@@ -345,6 +345,6 @@
   </footer>
 
   <!-- Script principal du site -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

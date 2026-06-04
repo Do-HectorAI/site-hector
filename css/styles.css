@@ -291,6 +291,45 @@ button:focus-visible {
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.03);
 }
 
+/* --------------------------------------------------------------------------
+   HEADER TRANSPARENT par-dessus la vidéo du hero (page d'accueil uniquement).
+   La classe .site-header--transparent est ajoutée au <header> dans index.html.
+   Tant qu'on n'a pas défilé au-delà du hero (le JS gère la classe .is-scrolled),
+   le header est transparent et son contenu passe en blanc pour rester lisible
+   sur la vidéo. Une fois le hero dépassé, il redevient le header blanc normal.
+   -------------------------------------------------------------------------- */
+.site-header--transparent:not(.is-scrolled) {
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+/* Logo et barres du hamburger en blanc sur la vidéo (mobile inclus) */
+.site-header--transparent:not(.is-scrolled) .header-logo img {
+  filter: brightness(0) invert(1);
+}
+.site-header--transparent:not(.is-scrolled) .logo-text {
+  color: #ffffff;
+}
+.site-header--transparent:not(.is-scrolled) .nav-toggle span {
+  background-color: #ffffff;
+}
+/* Liens et bouton en blanc UNIQUEMENT sur grand écran. Sur mobile, le menu
+   s'ouvre dans un panneau blanc : on y garde donc le texte foncé par défaut. */
+@media (min-width: 721px) {
+  .site-header--transparent:not(.is-scrolled) .nav-links a {
+    color: #ffffff;
+  }
+  .site-header--transparent:not(.is-scrolled) .nav-links a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .site-header--transparent:not(.is-scrolled) .btn-primary {
+    background-color: #ffffff;
+    color: #0a0a0a;
+  }
+}
+
 .header-inner {
   height: 100%;
   display: flex;
@@ -302,6 +341,7 @@ button:focus-visible {
 .header-logo img {
   height: 28px;
   width: auto;
+  transition: filter var(--transition-fast);
 }
 /* Repli texte si le logo SVG n'est pas encore fourni */
 .header-logo .logo-text {

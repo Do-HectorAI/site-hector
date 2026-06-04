@@ -61,15 +61,33 @@ function initMobileMenu() {
 
 /* --------------------------------------------------------------------------
    2. HEADER QUI SE DENSIFIE AU SCROLL
-   Ajoute la classe .is-scrolled au header dès qu'on défile un peu, ce qui
-   renforce le fond et ajoute une bordure/ombre légère (voir le CSS).
+   Ajoute la classe .is-scrolled au header quand on défile, ce qui renforce le
+   fond et ajoute une bordure/ombre légère (voir le CSS).
+
+   Cas particulier de l'accueil : le header y est transparent par-dessus la
+   vidéo du hero (classe .site-header--transparent). On veut alors qu'il reste
+   transparent TANT QU'ON EST SUR LE HERO, et qu'il devienne blanc seulement
+   une fois le hero dépassé. Le seuil de déclenchement est donc la hauteur du
+   hero ; sur les autres pages, on garde un petit seuil de 10 px.
    -------------------------------------------------------------------------- */
 function initHeaderScroll() {
   const header = document.querySelector(".site-header");
   if (!header) return;
 
+  const hero = document.querySelector(".hero");
+  const isTransparent = header.classList.contains("site-header--transparent");
+
+  // Calcule le seuil à partir duquel le header devient blanc.
+  function getThreshold() {
+    if (isTransparent && hero) {
+      // Juste avant que le bas du hero n'atteigne le bas du header.
+      return hero.offsetHeight - header.offsetHeight;
+    }
+    return 10;
+  }
+
   function onScroll() {
-    if (window.scrollY > 10) {
+    if (window.scrollY > getThreshold()) {
       header.classList.add("is-scrolled");
     } else {
       header.classList.remove("is-scrolled");
