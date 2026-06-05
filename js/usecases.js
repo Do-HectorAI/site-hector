@@ -65,6 +65,9 @@ const IMAGE_SOURCES = {
 document.addEventListener("DOMContentLoaded", function () {
   const frames = document.querySelectorAll("[data-video-id]");
 
+  // Lightbox réutilisable (créée une seule fois) pour agrandir les photos.
+  const lightbox = createLightbox();
+
   frames.forEach(function (frame) {
     const id = frame.getAttribute("data-video-id");
     const imageSrc = IMAGE_SOURCES[id];
@@ -82,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
       frame.removeAttribute("aria-label");
       frame.innerHTML = "";
       frame.appendChild(img);
+      // Rendre la photo cliquable pour l'afficher en grand.
+      makeImageZoomable(img, label, lightbox);
       return;
     }
 
@@ -109,3 +114,71 @@ document.addEventListener("DOMContentLoaded", function () {
     // 3) Rien de renseigné → on laisse le placeholder en place.
   });
 });
+
+/* --------------------------------------------------------------------------
+   Lightbox : crée une fois pour toutes une fenêtre superposée qui affiche une
+   photo en grand. Renvoie un objet avec une méthode show(src, alt).
+   Fermeture : bouton ×, clic sur le fond, ou touche Échap.
+   -------------------------------------------------------------------------- */
+function createLightbox() {
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Image agrandie");
+
+  const img = document.createElement("img");
+  img.alt = "";
+
+  const close = document.createElement("button");
+  close.type = "button";
+  close.className = "lightbox-close";
+  close.setAttribute("aria-label", "Fermer");
+  close.innerHTML = "&times;";
+
+  overlay.appendChild(img);
+  overlay.appendChild(close);
+  document.body.appendChild(overlay);
+
+  function hide() {
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = ""; // réautorise le défilement
+  }
+  function show(src, alt) {
+    img.src = src;
+    img.alt = alt || "";
+    overlay.classList.add("is-open");
+    document.body.style.overflow = "hidden"; // bloque le défilement de fond
+    close.focus();
+  }
+
+  close.addEventListener("click", hide);
+  // Clic sur le fond sombre (en dehors de l'image) → fermeture.
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) hide();
+  });
+  // Touche Échap → fermeture.
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) hide();
+  });
+
+  return { show: show };
+}
+
+/* Rend une image cliquable (et accessible au clavier) pour l'agrandir. */
+function makeImageZoomable(img, label, lightbox) {
+  img.setAttribute("role", "button");
+  img.setAttribute("tabindex", "0");
+  img.setAttribute("aria-label", "Agrandir l'image : " + (label || ""));
+
+  img.addEventListener("click", function () {
+    lightbox.show(img.src, label);
+  });
+  // Accessibilité clavier : Entrée ou Espace ouvrent aussi l'image.
+  img.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      lightbox.show(img.src, label);
+    }
+  });
+}

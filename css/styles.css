@@ -1037,6 +1037,12 @@ button:focus-visible {
 .usecase-list .usecase:nth-child(even) .usecase-media {
   order: 2;
 }
+/* Sur les lignes paires, le visuel passe à droite : on place donc la colonne
+   large à droite aussi, pour que le visuel garde TOUJOURS la même taille
+   (colonne large), quelle que soit la ligne. */
+.usecase-list .usecase:nth-child(even) {
+  grid-template-columns: 1fr 1.15fr;
+}
 .usecase-number {
   display: block;
   font-family: var(--font-title);
@@ -1070,6 +1076,59 @@ button:focus-visible {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+/* Photo cliquable : curseur loupe + léger zoom au survol pour indiquer le clic */
+.usecase-video img {
+  cursor: zoom-in;
+  transition: transform var(--transition-smooth);
+}
+.usecase-video img:hover {
+  transform: scale(1.03);
+}
+
+/* --- Lightbox : affichage d'une photo en grand au clic --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background-color: rgba(10, 10, 10, 0.88);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+.lightbox.is-open {
+  display: flex;
+}
+.lightbox img {
+  max-width: 92vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+.lightbox-close:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 /* Placeholder affiché tant que la vidéo n'est pas branchée (config JS) */
 .video-placeholder {
@@ -1144,6 +1203,10 @@ button:focus-visible {
   }
   .usecase-list .usecase:nth-child(even) .usecase-media {
     order: 0;
+  }
+  /* On annule aussi la colonne large des lignes paires : tout est empilé. */
+  .usecase-list .usecase:nth-child(even) {
+    grid-template-columns: 1fr;
   }
 }
 
