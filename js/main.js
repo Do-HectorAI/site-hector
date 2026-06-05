@@ -329,51 +329,33 @@ function initCountUp() {
 
 
 /* --------------------------------------------------------------------------
-   8. BOUCLE FLUIDE DE LA VIDÉO DU HERO (fondu enchaîné)
-   Une vidéo en lecture "loop" simple "saute" au raccord (la dernière image et
-   la première sont différentes). Pour une boucle fluide, on utilise DEUX copies
-   superposées (.hero-video) qui se relaient : peu avant la fin de la vidéo en
-   cours, on lance l'autre depuis le début et on échange l'opacité → le fondu
-   masque la coupure. L'attribut "loop" n'est donc pas utilisé sur ces vidéos.
+   8. RACCORD DE BOUCLE ADOUCI DE LA VIDÉO DU HERO
+   Une vidéo en lecture "loop" simple peut "sauter" au raccord (la dernière
+   image et la première sont différentes). Pour adoucir ce raccord, on estompe
+   brièvement la vidéo (vers le fond noir) juste avant la fin, puis on la fait
+   réapparaître au redémarrage. Une seule vidéo, on conserve l'attribut "loop".
    -------------------------------------------------------------------------- */
 function initHeroLoop() {
-  const videos = document.querySelectorAll(".hero-video");
-  if (videos.length < 2) return; // il faut deux vidéos pour le fondu enchaîné
+  const video = document.querySelector(".hero-media video");
+  if (!video) return;
 
   // Durée du fondu, en secondes (doit correspondre à la transition CSS).
-  const FADE = 1.0;
-  let active = 0;
+  const FADE = 0.5;
+  let faded = false;
 
-  videos.forEach(function (v) {
-    // Sécurité : ces vidéos doivent rester muettes et en lecture intégrée.
-    v.muted = true;
-    v.playsInline = true;
-  });
+  video.addEventListener("timeupdate", function () {
+    if (!video.duration) return;
+    const remaining = video.duration - video.currentTime;
 
-  // Lance la première vidéo (play() peut être bloqué : on ignore l'erreur).
-  const first = videos[0].play();
-  if (first && first.catch) first.catch(function () {});
-
-  // À chaque frame, on regarde si la vidéo active approche de sa fin.
-  function tick() {
-    const current = videos[active];
-
-    if (current.duration && current.currentTime >= current.duration - FADE) {
-      const next = (active + 1) % videos.length;
-      const nextVideo = videos[next];
-
-      // Relance l'autre vidéo depuis le début et fait le fondu.
-      try { nextVideo.currentTime = 0; } catch (e) {}
-      const p = nextVideo.play();
-      if (p && p.catch) p.catch(function () {});
-
-      nextVideo.classList.add("is-active");
-      current.classList.remove("is-active");
-      active = next;
+    // Approche de la fin → on estompe la vidéo (fondu sortant).
+    if (remaining <= FADE && !faded) {
+      faded = true;
+      video.classList.add("is-seam");
     }
-
-    requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
+    // La boucle est repartie au début → on la fait réapparaître (fondu entrant).
+    else if (video.currentTime < FADE && faded) {
+      faded = false;
+      video.classList.remove("is-seam");
+    }
+  });
 }
