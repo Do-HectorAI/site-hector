@@ -492,11 +492,6 @@ button:focus-visible {
   inset: 0;
   z-index: 0;
 }
-/* Fond noir derrière la vidéo : sert de toile de fond pendant le bref fondu
-   au raccord de boucle (la vidéo s'estompe vers le noir puis réapparaît). */
-.hero-media {
-  background-color: #000;
-}
 .hero-media img,
 .hero-media video {
   width: 100%;
@@ -504,14 +499,6 @@ button:focus-visible {
   object-fit: cover;
   /* Animation "Ken Burns" : zoom lent et continu (~20s, en boucle) */
   animation: kenburns 20s ease-in-out infinite alternate;
-}
-/* Fondu de raccord : le JS (initHeroLoop) ajoute .is-seam juste avant la fin
-   de la vidéo, ce qui l'estompe, puis la retire au redémarrage. */
-.hero-media video {
-  transition: opacity 0.5s ease;
-}
-.hero-media video.is-seam {
-  opacity: 0;
 }
 
 /* Animation de zoom progressif type Ken Burns */

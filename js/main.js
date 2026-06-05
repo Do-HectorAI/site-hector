@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollReveal();
   initSmoothAnchors();
   initCountUp();
-  initHeroLoop();
 });
 
 
@@ -324,38 +323,5 @@ function initCountUp() {
 
   counters.forEach(function (el) {
     observer.observe(el);
-  });
-}
-
-
-/* --------------------------------------------------------------------------
-   8. RACCORD DE BOUCLE ADOUCI DE LA VIDÉO DU HERO
-   Une vidéo en lecture "loop" simple peut "sauter" au raccord (la dernière
-   image et la première sont différentes). Pour adoucir ce raccord, on estompe
-   brièvement la vidéo (vers le fond noir) juste avant la fin, puis on la fait
-   réapparaître au redémarrage. Une seule vidéo, on conserve l'attribut "loop".
-   -------------------------------------------------------------------------- */
-function initHeroLoop() {
-  const video = document.querySelector(".hero-media video");
-  if (!video) return;
-
-  // Durée du fondu, en secondes (doit correspondre à la transition CSS).
-  const FADE = 0.5;
-  let faded = false;
-
-  video.addEventListener("timeupdate", function () {
-    if (!video.duration) return;
-    const remaining = video.duration - video.currentTime;
-
-    // Approche de la fin → on estompe la vidéo (fondu sortant).
-    if (remaining <= FADE && !faded) {
-      faded = true;
-      video.classList.add("is-seam");
-    }
-    // La boucle est repartie au début → on la fait réapparaître (fondu entrant).
-    else if (video.currentTime < FADE && faded) {
-      faded = false;
-      video.classList.remove("is-seam");
-    }
   });
 }
