@@ -41,18 +41,18 @@ const VIDEO_SOURCES = {
 const IMAGE_SOURCES = {
   /* Axe 1 : Rédaction d'acte */
   "redaction-1": "", // ex : "assets/img/usecases/redaction-1.jpg"
-  "redaction-2": "",
+  "redaction-2": "assets/img/usecases/redaction-2.png",
   "redaction-3": "",
 
   /* Axe 2 : Analyse de dossier */
   "analyse-1": "",
-  "analyse-2": "",
+  "analyse-2": "assets/img/usecases/analyse-2.png",
   "analyse-3": "",
 
   /* Axe 3 : Gestion du contentieux */
-  "gestion-1": "",
+  "gestion-1": "assets/img/usecases/gestion-1.png",
   "gestion-2": "",
-  "gestion-3": "",
+  "gestion-3": "assets/img/usecases/gestion-3.png",
 };
 
 /* --------------------------------------------------------------------------
