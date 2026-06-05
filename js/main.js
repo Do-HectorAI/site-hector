@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollReveal();
   initSmoothAnchors();
   initCountUp();
+  initHeroLoop();
 });
 
 
@@ -324,4 +325,55 @@ function initCountUp() {
   counters.forEach(function (el) {
     observer.observe(el);
   });
+}
+
+
+/* --------------------------------------------------------------------------
+   8. BOUCLE FLUIDE DE LA VIDÉO DU HERO (fondu enchaîné)
+   Une vidéo en lecture "loop" simple "saute" au raccord (la dernière image et
+   la première sont différentes). Pour une boucle fluide, on utilise DEUX copies
+   superposées (.hero-video) qui se relaient : peu avant la fin de la vidéo en
+   cours, on lance l'autre depuis le début et on échange l'opacité → le fondu
+   masque la coupure. L'attribut "loop" n'est donc pas utilisé sur ces vidéos.
+   -------------------------------------------------------------------------- */
+function initHeroLoop() {
+  const videos = document.querySelectorAll(".hero-video");
+  if (videos.length < 2) return; // il faut deux vidéos pour le fondu enchaîné
+
+  // Durée du fondu, en secondes (doit correspondre à la transition CSS).
+  const FADE = 1.0;
+  let active = 0;
+
+  videos.forEach(function (v) {
+    // Sécurité : ces vidéos doivent rester muettes et en lecture intégrée.
+    v.muted = true;
+    v.playsInline = true;
+  });
+
+  // Lance la première vidéo (play() peut être bloqué : on ignore l'erreur).
+  const first = videos[0].play();
+  if (first && first.catch) first.catch(function () {});
+
+  // À chaque frame, on regarde si la vidéo active approche de sa fin.
+  function tick() {
+    const current = videos[active];
+
+    if (current.duration && current.currentTime >= current.duration - FADE) {
+      const next = (active + 1) % videos.length;
+      const nextVideo = videos[next];
+
+      // Relance l'autre vidéo depuis le début et fait le fondu.
+      try { nextVideo.currentTime = 0; } catch (e) {}
+      const p = nextVideo.play();
+      if (p && p.catch) p.catch(function () {});
+
+      nextVideo.classList.add("is-active");
+      current.classList.remove("is-active");
+      active = next;
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
 }

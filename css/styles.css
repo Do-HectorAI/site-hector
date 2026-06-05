@@ -500,6 +500,20 @@ button:focus-visible {
   /* Animation "Ken Burns" : zoom lent et continu (~20s, en boucle) */
   animation: kenburns 20s ease-in-out infinite alternate;
 }
+/* Boucle fluide : les deux vidéos sont superposées et se fondent l'une dans
+   l'autre. Seule celle qui porte .is-active est visible ; la transition
+   d'opacité crée le fondu enchaîné au raccord (voir initHeroLoop). */
+.hero-media video {
+  position: absolute;
+  inset: 0;
+}
+.hero-video {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.hero-video.is-active {
+  opacity: 1;
+}
 
 /* Animation de zoom progressif type Ken Burns */
 @keyframes kenburns {
