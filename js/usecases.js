@@ -228,7 +228,13 @@ function lazyPlay(video) {
         }
       });
     },
-    { threshold: 0.25 } // déclenche quand ~25% de la vidéo est visible
+    {
+      // rootMargin avec une grande marge BASSE : la vidéo commence à se charger
+      // ~700px AVANT d'entrer à l'écran, pour qu'elle soit prête (et déjà en
+      // lecture) au moment où l'utilisateur arrive dessus.
+      rootMargin: "200px 0px 700px 0px",
+      threshold: 0.01,
+    }
   );
 
   observer.observe(video);
