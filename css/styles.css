@@ -330,6 +330,14 @@ button:focus-visible {
     background-color: #ffffff;
     color: #0a0a0a;
   }
+  /* Bouton secondaire (Se connecter) en blanc sur la vidéo du hero */
+  .site-header--transparent:not(.is-scrolled) .btn-secondary {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+  .site-header--transparent:not(.is-scrolled) .btn-secondary:hover {
+    border-color: #ffffff;
+  }
 }
 
 .header-inner {
