@@ -22,14 +22,14 @@
 /* --- VIDÉOS (.mp4 dans assets/video/) --- */
 const VIDEO_SOURCES = {
   /* Axe 1 : Rédaction d'acte */
-  "redaction-1": "", // Rédigez dans votre style, dans Word (modèles + style)
+  "redaction-1": "", // Rédigez dans votre style (vidéo à recompresser : > 100 Mo)
   "redaction-2": "", // Plan détaillé de l'argumentation
-  "redaction-3": "", // Enrichissez vos actes (jurisprudence + arguments)
+  "redaction-3": "assets/video/usecases/redaction-3.mp4", // Enrichissez vos actes
 
   /* Axe 2 : Analyse de dossier */
-  "analyse-1": "", // Maîtrisez vos dossiers les plus volumineux
+  "analyse-1": "assets/video/usecases/analyse-1.mp4", // Maîtrisez vos dossiers volumineux
   "analyse-2": "", // Faits, parties et tableau des pièces (fusion)
-  "analyse-3": "", // Trouvez la jurisprudence
+  "analyse-3": "assets/video/usecases/analyse-3.mp4", // Trouvez la jurisprudence
 
   /* Axe 3 : Gestion du contentieux */
   "gestion-1": "", // Structurez votre dossier (renommage auto + scission)
