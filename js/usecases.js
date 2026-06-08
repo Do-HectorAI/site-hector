@@ -108,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       frame.innerHTML = "";
       frame.appendChild(video);
+      // Rendre la vidéo cliquable pour l'ouvrir en grand, avec le son.
+      makeVideoZoomable(video, videoSrc, label, lightbox);
       return;
     }
 
@@ -116,19 +118,30 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* --------------------------------------------------------------------------
-   Lightbox : crée une fois pour toutes une fenêtre superposée qui affiche une
-   photo en grand. Renvoie un objet avec une méthode show(src, alt).
-   Fermeture : bouton ×, clic sur le fond, ou touche Échap.
+   Lightbox : crée une fois pour toutes une fenêtre superposée qui affiche un
+   média en grand. Gère deux cas :
+     - showImage(src, alt) : affiche une photo ;
+     - showVideo(src, alt) : affiche une vidéo AVEC LE SON et des contrôles
+       (lecture/pause, volume), en lecture automatique et en boucle.
+   Fermeture : bouton ×, clic sur le fond, ou touche Échap. À la fermeture, la
+   vidéo est arrêtée (le son se coupe).
    -------------------------------------------------------------------------- */
 function createLightbox() {
   const overlay = document.createElement("div");
   overlay.className = "lightbox";
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
-  overlay.setAttribute("aria-label", "Image agrandie");
+  overlay.setAttribute("aria-label", "Média agrandi");
 
   const img = document.createElement("img");
   img.alt = "";
+  img.style.display = "none";
+
+  const video = document.createElement("video");
+  video.setAttribute("controls", ""); // contrôles natifs (volume, pause…)
+  video.setAttribute("playsinline", ""); // reste dans la fenêtre sur mobile
+  video.loop = true;
+  video.style.display = "none";
 
   const close = document.createElement("button");
   close.type = "button";
@@ -137,23 +150,47 @@ function createLightbox() {
   close.innerHTML = "&times;";
 
   overlay.appendChild(img);
+  overlay.appendChild(video);
   overlay.appendChild(close);
   document.body.appendChild(overlay);
 
-  function hide() {
-    overlay.classList.remove("is-open");
-    document.body.style.overflow = ""; // réautorise le défilement
-  }
-  function show(src, alt) {
-    img.src = src;
-    img.alt = alt || "";
+  function open() {
     overlay.classList.add("is-open");
     document.body.style.overflow = "hidden"; // bloque le défilement de fond
     close.focus();
   }
+  function hide() {
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = ""; // réautorise le défilement
+    // Arrête la vidéo et libère la source (coupe le son).
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+  }
+
+  function showImage(src, alt) {
+    video.pause();
+    video.style.display = "none";
+    img.style.display = "block";
+    img.src = src;
+    img.alt = alt || "";
+    open();
+  }
+  function showVideo(src, alt) {
+    img.style.display = "none";
+    video.style.display = "block";
+    video.src = src;
+    video.muted = false; // le son est activé en grand
+    video.currentTime = 0;
+    video.setAttribute("aria-label", alt || "");
+    open();
+    // Le clic d'ouverture est un geste utilisateur : la lecture avec son est autorisée.
+    const p = video.play();
+    if (p && p.catch) p.catch(function () {});
+  }
 
   close.addEventListener("click", hide);
-  // Clic sur le fond sombre (en dehors de l'image) → fermeture.
+  // Clic sur le fond sombre (en dehors du média) → fermeture.
   overlay.addEventListener("click", function (e) {
     if (e.target === overlay) hide();
   });
@@ -162,7 +199,7 @@ function createLightbox() {
     if (e.key === "Escape" && overlay.classList.contains("is-open")) hide();
   });
 
-  return { show: show };
+  return { showImage: showImage, showVideo: showVideo };
 }
 
 /* Rend une image cliquable (et accessible au clavier) pour l'agrandir. */
@@ -172,13 +209,31 @@ function makeImageZoomable(img, label, lightbox) {
   img.setAttribute("aria-label", "Agrandir l'image : " + (label || ""));
 
   img.addEventListener("click", function () {
-    lightbox.show(img.src, label);
+    lightbox.showImage(img.src, label);
   });
   // Accessibilité clavier : Entrée ou Espace ouvrent aussi l'image.
   img.addEventListener("keydown", function (e) {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      lightbox.show(img.src, label);
+      lightbox.showImage(img.src, label);
+    }
+  });
+}
+
+/* Rend une vidéo cliquable (et accessible au clavier) pour l'ouvrir en grand
+   AVEC LE SON. La vidéo dans la page reste muette et en boucle. */
+function makeVideoZoomable(video, src, label, lightbox) {
+  video.setAttribute("role", "button");
+  video.setAttribute("tabindex", "0");
+  video.setAttribute("aria-label", "Agrandir la vidéo (avec le son) : " + (label || ""));
+
+  video.addEventListener("click", function () {
+    lightbox.showVideo(src, label);
+  });
+  video.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      lightbox.showVideo(src, label);
     }
   });
 }

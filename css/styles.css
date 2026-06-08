@@ -1085,12 +1085,14 @@ button:focus-visible {
   object-fit: cover;
   display: block;
 }
-/* Photo cliquable : curseur loupe + léger zoom au survol pour indiquer le clic */
-.usecase-video img {
+/* Média cliquable (photo ou vidéo) : curseur loupe + léger zoom au survol */
+.usecase-video img,
+.usecase-video video {
   cursor: zoom-in;
   transition: transform var(--transition-smooth);
 }
-.usecase-video img:hover {
+.usecase-video img:hover,
+.usecase-video video:hover {
   transform: scale(1.03);
 }
 
@@ -1111,7 +1113,8 @@ button:focus-visible {
 .lightbox.is-open {
   display: flex;
 }
-.lightbox img {
+.lightbox img,
+.lightbox video {
   max-width: 92vw;
   max-height: 88vh;
   width: auto;
