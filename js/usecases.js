@@ -94,10 +94,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (videoSrc) {
       const poster = frame.getAttribute("data-poster") || "";
       const video = document.createElement("video");
-      video.autoplay = true;
+      // Pas d'autoplay : on ne charge/joue la vidéo que lorsqu'elle est visible
+      // (voir lazyPlay), pour ne pas tout télécharger d'un coup au chargement.
       video.muted = true;
       video.loop = true;
       video.playsInline = true; // évite le plein écran forcé sur iOS
+      video.preload = "none"; // rien n'est téléchargé tant qu'on ne lit pas
       if (poster) video.poster = poster;
       if (label) video.setAttribute("aria-label", label);
 
@@ -110,6 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
       frame.appendChild(video);
       // Rendre la vidéo cliquable pour l'ouvrir en grand, avec le son.
       makeVideoZoomable(video, videoSrc, label, lightbox);
+      // Charger et lire la vidéo seulement quand elle entre à l'écran.
+      lazyPlay(video);
       return;
     }
 
@@ -200,6 +204,34 @@ function createLightbox() {
   });
 
   return { showImage: showImage, showVideo: showVideo };
+}
+
+/* Lecture "paresseuse" : la vidéo ne se charge et ne démarre que lorsqu'elle
+   entre dans l'écran, et se met en pause quand elle en sort. Cela évite de
+   télécharger toutes les vidéos de la page en même temps au chargement. */
+function lazyPlay(video) {
+  // Repli : sans IntersectionObserver, on lit directement.
+  if (!("IntersectionObserver" in window)) {
+    const p = video.play();
+    if (p && p.catch) p.catch(function () {});
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const p = entry.target.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          entry.target.pause();
+        }
+      });
+    },
+    { threshold: 0.25 } // déclenche quand ~25% de la vidéo est visible
+  );
+
+  observer.observe(video);
 }
 
 /* Rend une image cliquable (et accessible au clavier) pour l'agrandir. */
