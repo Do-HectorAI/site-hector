@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollReveal();
   initSmoothAnchors();
   initCountUp();
+  initFeatureVideos();
 });
 
 
@@ -323,5 +324,47 @@ function initCountUp() {
 
   counters.forEach(function (el) {
     observer.observe(el);
+  });
+}
+
+
+/* --------------------------------------------------------------------------
+   8. VIDÉOS DE LA SECTION FONCTIONNALITÉS (chargement différé)
+   Les vidéos de démo (.feature-media) ne sont pas en autoplay : on ne les
+   charge et ne les lit que lorsqu'elles sont visibles à l'écran. Ainsi, au
+   chargement de la page, elles ne se disputent pas la bande passante avec la
+   vidéo du hero. L'IntersectionObserver gère aussi le changement d'onglet :
+   quand un panneau caché (display:none) devient visible, sa vidéo démarre ;
+   celle du panneau masqué se met en pause.
+   -------------------------------------------------------------------------- */
+function initFeatureVideos() {
+  const videos = document.querySelectorAll(".feature-media");
+  if (videos.length === 0) return;
+
+  // Repli : sans IntersectionObserver, lecture directe.
+  if (!("IntersectionObserver" in window)) {
+    videos.forEach(function (v) {
+      const p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const p = entry.target.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          entry.target.pause();
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
+
+  videos.forEach(function (v) {
+    observer.observe(v);
   });
 }

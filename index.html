@@ -15,7 +15,7 @@
        Le "?v=2" force le navigateur à recharger le CSS après une mise à jour
        (évite qu'une ancienne version reste en cache). Incrémentez ce numéro
        (v=3, v=4...) à chaque fois que vous modifiez css/styles.css. -->
-  <link rel="stylesheet" href="css/styles.css?v=9" />
+  <link rel="stylesheet" href="css/styles.css?v=10" />
 
   <!-- Favicon (remplaçable par votre propre icône) -->
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml" />
@@ -67,7 +67,7 @@
              L'image hero.jpg sert d'aperçu (poster) le temps du chargement.
              Pour revenir à une image fixe, remplacer ce <video> par :
              <img src="assets/img/hero.jpg" alt="" /> -->
-        <video autoplay muted loop playsinline poster="assets/img/hero.jpg">
+        <video autoplay muted loop playsinline preload="auto" poster="assets/img/hero.jpg">
           <source src="assets/video/hero.mp4?v=5" type="video/mp4" />
         </video>
       </div>
@@ -178,8 +178,9 @@
                 des moyens de droit, recherche de la jurisprudence pertinente.
               </p>
             </div>
-            <!-- Zone visuelle : vidéo de démonstration de l'analyse des dossiers -->
-            <video class="feature-media" autoplay muted loop playsinline
+            <!-- Zone visuelle : vidéo de démonstration de l'analyse des dossiers.
+                 Pas d'autoplay : chargée/jouée seulement quand visible (voir initFeatureVideos). -->
+            <video class="feature-media" muted loop playsinline preload="none"
                    poster="assets/img/poster-analyse.jpg">
               <source src="assets/video/demo-analyse.mp4" type="video/mp4" />
               Votre navigateur ne prend pas en charge la lecture vidéo.
@@ -197,8 +198,9 @@
                 dans votre style, prêts à être retravaillés.
               </p>
             </div>
-            <!-- Zone visuelle : vidéo de démonstration de la rédaction d'actes -->
-            <video class="feature-media" autoplay muted loop playsinline
+            <!-- Zone visuelle : vidéo de démonstration de la rédaction d'actes.
+                 Pas d'autoplay : chargée/jouée seulement quand visible (voir initFeatureVideos). -->
+            <video class="feature-media" muted loop playsinline preload="none"
                    poster="assets/img/poster-redaction.jpg">
               <source src="assets/video/demo-redaction.mp4" type="video/mp4" />
               Votre navigateur ne prend pas en charge la lecture vidéo.
@@ -323,6 +325,6 @@
   </footer>
 
   <!-- Script principal du site -->
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
