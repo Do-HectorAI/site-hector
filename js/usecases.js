@@ -22,7 +22,7 @@
 /* --- VIDÉOS (.mp4 dans assets/video/) --- */
 const VIDEO_SOURCES = {
   /* Axe 1 : Rédaction d'acte */
-  "redaction-1": "", // Rédigez dans votre style (vidéo à recompresser : > 100 Mo)
+  "redaction-1": "assets/video/usecases/redaction-1.mp4", // Rédigez dans votre style
   "redaction-2": "", // Plan détaillé de l'argumentation
   "redaction-3": "assets/video/usecases/redaction-3.mp4", // Enrichissez vos actes
 
