@@ -555,8 +555,8 @@ button:focus-visible {
 .hero-logo {
   height: 4.5cm;
   width: auto;
-  /* Plume collée au titre (marge basse nulle) */
-  margin: 0 auto 0;
+  /* Plume rapprochée encore plus du titre (chevauchement léger) */
+  margin: 0 auto -0.8rem;
   /* Filtre pour forcer la plume (souvent noire) en blanc dans le hero */
   filter: brightness(0) invert(1);
   /* Retourne la plume vers la droite (miroir horizontal) */
@@ -898,7 +898,7 @@ button:focus-visible {
    On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
 /* Bande sombre pleine largeur qui accueille la signature "hector" */
 .cta-wordmark-band {
-  background-color: #0a0a0a;
+  background-color: #262626; /* gris foncé */
   padding: var(--space-lg) var(--container-pad);
 }
 .cta-wordmark {
