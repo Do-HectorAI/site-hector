@@ -555,7 +555,8 @@ button:focus-visible {
 .hero-logo {
   height: 4.5cm;
   width: auto;
-  margin: 0 auto var(--space-md);
+  /* Marge basse réduite : la plume est plus proche du titre */
+  margin: 0 auto var(--space-xs);
   /* Filtre pour forcer la plume (souvent noire) en blanc dans le hero */
   filter: brightness(0) invert(1);
   /* Retourne la plume vers la droite (miroir horizontal) */
@@ -897,9 +898,10 @@ button:focus-visible {
    On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
 .cta-wordmark {
   display: block;
-  max-width: min(95%, 1100px);
-  max-height: 620px;
-  width: auto;
+  /* « hector » occupe toute la largeur du contenu ; image recadrée au plus
+     près → aucune marge superflue en haut/bas. */
+  width: 100%;
+  max-width: 100%;
   height: auto;
   margin: var(--space-xl) auto 0;
 }
