@@ -349,8 +349,8 @@ button:focus-visible {
 
 /* Logo dans le header */
 .header-logo img {
-  /* Remplit toute la hauteur du bandeau (en gardant 8px de marge haut/bas) */
-  height: calc(var(--header-height) - 8px);
+  /* Un peu plus petit que la hauteur du bandeau (marge haut/bas plus généreuse) */
+  height: calc(var(--header-height) - 30px);
   width: auto;
   transition: filter var(--transition-fast);
 }
@@ -555,8 +555,8 @@ button:focus-visible {
 .hero-logo {
   height: 4.5cm;
   width: auto;
-  /* Marge basse réduite : la plume est plus proche du titre */
-  margin: 0 auto var(--space-xs);
+  /* Plume collée au titre (marge basse nulle) */
+  margin: 0 auto 0;
   /* Filtre pour forcer la plume (souvent noire) en blanc dans le hero */
   filter: brightness(0) invert(1);
   /* Retourne la plume vers la droite (miroir horizontal) */
@@ -896,14 +896,19 @@ button:focus-visible {
 }
 /* Signature "hector" en très grand sous le bouton.
    On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
+/* Bande sombre pleine largeur qui accueille la signature "hector" */
+.cta-wordmark-band {
+  background-color: #0a0a0a;
+  padding: var(--space-lg) var(--container-pad);
+}
 .cta-wordmark {
   display: block;
-  /* « hector » occupe toute la largeur du contenu ; image recadrée au plus
-     près → aucune marge superflue en haut/bas. */
   width: 100%;
-  max-width: 100%;
+  max-width: 1100px;
   height: auto;
-  margin: var(--space-xl) auto 0;
+  margin: 0 auto;
+  /* Logo "hector" (foncé) forcé en blanc sur le fond sombre */
+  filter: brightness(0) invert(1);
 }
 
 
