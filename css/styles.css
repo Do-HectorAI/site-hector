@@ -892,10 +892,13 @@ button:focus-visible {
   max-width: 720px;
   margin: 0 auto var(--space-md);
 }
-/* Signature "hector" en très grand sous le bouton */
+/* Signature "hector" en très grand sous le bouton.
+   On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
 .cta-wordmark {
   display: block;
-  width: min(90%, 900px);
+  max-width: min(90%, 900px);
+  max-height: 300px;
+  width: auto;
   height: auto;
   margin: var(--space-xl) auto 0;
 }
