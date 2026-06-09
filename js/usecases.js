@@ -59,7 +59,7 @@ const IMAGE_SOURCES = {
    La vidéo ne joue (et ne boucle) que sur l'intervalle indiqué, dans l'aperçu
    comme en grand. Absent / non renseigné → la vidéo entière est jouée. */
 const SEGMENTS = {
-  "redaction-1": [6, 24],
+  // redaction-1 : fichier déjà découpé (extrait 6-24 s) → pas de segment ici.
   "redaction-3": [10, 20],
   "analyse-1": [1, 17],
   "analyse-3": [14, 26],
