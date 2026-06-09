@@ -55,6 +55,16 @@ const IMAGE_SOURCES = {
   "gestion-3": "assets/img/usecases/gestion-3.png",
 };
 
+/* --- SEGMENTS À CONSERVER (en secondes : [début, fin]) ---
+   La vidéo ne joue (et ne boucle) que sur l'intervalle indiqué, dans l'aperçu
+   comme en grand. Absent / non renseigné → la vidéo entière est jouée. */
+const SEGMENTS = {
+  "redaction-1": [6, 24],
+  "redaction-3": [10, 20],
+  "analyse-1": [1, 17],
+  "analyse-3": [14, 26],
+};
+
 /* --------------------------------------------------------------------------
    Au chargement : pour chaque cadre média (élément [data-video-id]) :
      1. si une PHOTO est renseignée → on affiche l'image ;
@@ -110,8 +120,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       frame.innerHTML = "";
       frame.appendChild(video);
-      // Rendre la vidéo cliquable pour l'ouvrir en grand, avec le son.
-      makeVideoZoomable(video, videoSrc, label, lightbox);
+
+      // Segment à conserver (ex. [6, 24]) : la vidéo ne boucle que sur cette portion.
+      const seg = SEGMENTS[id] || null;
+      if (seg) loopSegment(video, seg[0], seg[1]);
+
+      // Rendre la vidéo cliquable pour l'ouvrir en grand (sans son).
+      makeVideoZoomable(video, videoSrc, label, lightbox, seg);
       // Charger et lire la vidéo seulement quand elle entre à l'écran.
       lazyPlay(video);
       return;
@@ -125,10 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
    Lightbox : crée une fois pour toutes une fenêtre superposée qui affiche un
    média en grand. Gère deux cas :
      - showImage(src, alt) : affiche une photo ;
-     - showVideo(src, alt) : affiche une vidéo AVEC LE SON et des contrôles
-       (lecture/pause, volume), en lecture automatique et en boucle.
-   Fermeture : bouton ×, clic sur le fond, ou touche Échap. À la fermeture, la
-   vidéo est arrêtée (le son se coupe).
+     - showVideo(src, alt, seg) : affiche une vidéo (SANS son, avec contrôles),
+       en lecture automatique et en boucle. Si un segment [début, fin] est
+       fourni, la lecture est limitée à cette portion.
+   Fermeture : bouton ×, clic sur le fond, ou touche Échap.
    -------------------------------------------------------------------------- */
 function createLightbox() {
   const overlay = document.createElement("div");
@@ -142,10 +157,14 @@ function createLightbox() {
   img.style.display = "none";
 
   const video = document.createElement("video");
-  video.setAttribute("controls", ""); // contrôles natifs (volume, pause…)
+  video.setAttribute("controls", ""); // contrôles natifs (pause, plein écran…)
   video.setAttribute("playsinline", ""); // reste dans la fenêtre sur mobile
+  video.muted = true; // pas de son
   video.loop = true;
   video.style.display = "none";
+
+  // Segment courant à boucler (null = vidéo entière).
+  let currentSeg = null;
 
   const close = document.createElement("button");
   close.type = "button";
@@ -158,6 +177,18 @@ function createLightbox() {
   overlay.appendChild(close);
   document.body.appendChild(overlay);
 
+  // Bouclage sur le segment (un seul écouteur, réutilisé à chaque ouverture).
+  video.addEventListener("loadedmetadata", function () {
+    if (currentSeg) {
+      try { video.currentTime = currentSeg[0]; } catch (e) {}
+    }
+  });
+  video.addEventListener("timeupdate", function () {
+    if (currentSeg && video.currentTime >= currentSeg[1]) {
+      try { video.currentTime = currentSeg[0]; } catch (e) {}
+    }
+  });
+
   function open() {
     overlay.classList.add("is-open");
     document.body.style.overflow = "hidden"; // bloque le défilement de fond
@@ -166,7 +197,7 @@ function createLightbox() {
   function hide() {
     overlay.classList.remove("is-open");
     document.body.style.overflow = ""; // réautorise le défilement
-    // Arrête la vidéo et libère la source (coupe le son).
+    // Arrête la vidéo et libère la source.
     video.pause();
     video.removeAttribute("src");
     video.load();
@@ -180,15 +211,15 @@ function createLightbox() {
     img.alt = alt || "";
     open();
   }
-  function showVideo(src, alt) {
+  function showVideo(src, alt, seg) {
+    currentSeg = seg || null;
     img.style.display = "none";
     video.style.display = "block";
+    video.muted = true; // pas de son
     video.src = src;
-    video.muted = false; // le son est activé en grand
-    video.currentTime = 0;
+    video.currentTime = currentSeg ? currentSeg[0] : 0;
     video.setAttribute("aria-label", alt || "");
     open();
-    // Le clic d'ouverture est un geste utilisateur : la lecture avec son est autorisée.
     const p = video.play();
     if (p && p.catch) p.catch(function () {});
   }
@@ -204,6 +235,23 @@ function createLightbox() {
   });
 
   return { showImage: showImage, showVideo: showVideo };
+}
+
+/* Fait jouer une vidéo (de la page) en boucle uniquement sur [start, end]. */
+function loopSegment(video, start, end) {
+  function seekStart() {
+    try { video.currentTime = start; } catch (e) {}
+  }
+  // Positionne au début du segment dès que la durée/metadata est connue.
+  if (video.readyState >= 1) {
+    seekStart();
+  } else {
+    video.addEventListener("loadedmetadata", seekStart, { once: true });
+  }
+  // Revient au début du segment dès qu'on atteint la fin.
+  video.addEventListener("timeupdate", function () {
+    if (video.currentTime >= end) seekStart();
+  });
 }
 
 /* Lecture "paresseuse" : la vidéo ne se charge et ne démarre que lorsqu'elle
@@ -258,20 +306,20 @@ function makeImageZoomable(img, label, lightbox) {
   });
 }
 
-/* Rend une vidéo cliquable (et accessible au clavier) pour l'ouvrir en grand
-   AVEC LE SON. La vidéo dans la page reste muette et en boucle. */
-function makeVideoZoomable(video, src, label, lightbox) {
+/* Rend une vidéo cliquable (et accessible au clavier) pour l'ouvrir en grand.
+   seg = segment [début, fin] à conserver (ou null pour la vidéo entière). */
+function makeVideoZoomable(video, src, label, lightbox, seg) {
   video.setAttribute("role", "button");
   video.setAttribute("tabindex", "0");
-  video.setAttribute("aria-label", "Agrandir la vidéo (avec le son) : " + (label || ""));
+  video.setAttribute("aria-label", "Agrandir la vidéo : " + (label || ""));
 
   video.addEventListener("click", function () {
-    lightbox.showVideo(src, label);
+    lightbox.showVideo(src, label, seg);
   });
   video.addEventListener("keydown", function (e) {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      lightbox.showVideo(src, label);
+      lightbox.showVideo(src, label, seg);
     }
   });
 }
