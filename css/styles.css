@@ -552,11 +552,13 @@ button:focus-visible {
 
 /* Logo blanc centré dans le hero */
 .hero-logo {
-  height: 40px;
+  height: 64px;
   width: auto;
   margin: 0 auto var(--space-md);
-  /* Filtre pour forcer le logo (souvent noir) en blanc dans le hero */
+  /* Filtre pour forcer la plume (souvent noire) en blanc dans le hero */
   filter: brightness(0) invert(1);
+  /* Retourne la plume vers la droite (miroir horizontal) */
+  transform: scaleX(-1);
 }
 .hero-logo-text {
   font-family: var(--font-title);
@@ -889,6 +891,13 @@ button:focus-visible {
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   max-width: 720px;
   margin: 0 auto var(--space-md);
+}
+/* Signature "hector" en très grand sous le bouton */
+.cta-wordmark {
+  display: block;
+  width: min(90%, 900px);
+  height: auto;
+  margin: var(--space-xl) auto 0;
 }
 
 
