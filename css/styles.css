@@ -61,7 +61,7 @@
   --radius-md: 12px;
 
   /* --- Hauteur du header (sert à compenser le décalage des ancres) --- */
-  --header-height: 72px;
+  --header-height: 96px;
 
   /* --- Transitions douces réutilisées partout --- */
   --transition-fast: 0.2s ease;
@@ -349,7 +349,7 @@ button:focus-visible {
 
 /* Logo dans le header */
 .header-logo img {
-  height: 28px;
+  height: 72px;
   width: auto;
   transition: filter var(--transition-fast);
 }
@@ -552,7 +552,7 @@ button:focus-visible {
 
 /* Logo blanc centré dans le hero */
 .hero-logo {
-  height: 64px;
+  height: 3cm;
   width: auto;
   margin: 0 auto var(--space-md);
   /* Filtre pour forcer la plume (souvent noire) en blanc dans le hero */
@@ -896,8 +896,8 @@ button:focus-visible {
    On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
 .cta-wordmark {
   display: block;
-  max-width: min(90%, 900px);
-  max-height: 300px;
+  max-width: min(95%, 1100px);
+  max-height: 620px;
   width: auto;
   height: auto;
   margin: var(--space-xl) auto 0;
