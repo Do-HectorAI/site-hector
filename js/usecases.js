@@ -33,7 +33,7 @@ const VIDEO_SOURCES = {
 
   /* Axe 3 : Gestion du contentieux */
   "gestion-1": "", // Structurez votre dossier (renommage auto + scission)
-  "gestion-2": "", // Numérotez et tamponnez vos pièces
+  "gestion-2": "assets/video/usecases/gestion-2.mp4", // Numérotez et tamponnez vos pièces
   "gestion-3": "", // Centralisez et sécurisez vos dossiers
 };
 
