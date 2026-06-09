@@ -896,9 +896,9 @@ button:focus-visible {
 }
 /* Signature "hector" en très grand sous le bouton.
    On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
-/* Bande sombre pleine largeur qui accueille la signature "hector" */
+/* Bande de la signature "hector" (fond blanc) */
 .cta-wordmark-band {
-  background-color: #262626; /* gris foncé */
+  background-color: #ffffff;
   padding: var(--space-lg) var(--container-pad);
 }
 .cta-wordmark {
@@ -907,8 +907,7 @@ button:focus-visible {
   max-width: 1100px;
   height: auto;
   margin: 0 auto;
-  /* Logo "hector" (foncé) forcé en blanc sur le fond sombre */
-  filter: brightness(0) invert(1);
+  /* "hector" affiché dans sa couleur d'origine (noir) sur fond blanc */
 }
 
 
