@@ -640,6 +640,8 @@ button:focus-visible {
 
 /* --- Chiffres clés (3 colonnes) --- */
 .stats {
+  /* Fond beige clair pour distinguer la section des chiffres */
+  background-color: #f6f2ea;
   /* Un peu plus d'air au-dessus et en dessous des chiffres */
   padding-block: calc(var(--space-xl) + var(--space-md));
 }
@@ -894,9 +896,9 @@ button:focus-visible {
 }
 /* Signature "hector" en très grand sous le bouton.
    On borne largeur ET hauteur pour rester maîtrisé quelle que soit l'image. */
-/* Bande de la signature "hector" (fond blanc) */
+/* Bande de la signature "hector" (fond beige très clair) */
 .cta-wordmark-band {
-  background-color: #ffffff;
+  background-color: #faf7f1;
   padding: var(--space-lg) var(--container-pad);
 }
 .cta-wordmark {
