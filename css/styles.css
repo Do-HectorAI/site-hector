@@ -349,7 +349,8 @@ button:focus-visible {
 
 /* Logo dans le header */
 .header-logo img {
-  height: 72px;
+  /* Remplit toute la hauteur du bandeau (en gardant 8px de marge haut/bas) */
+  height: calc(var(--header-height) - 8px);
   width: auto;
   transition: filter var(--transition-fast);
 }
@@ -552,7 +553,7 @@ button:focus-visible {
 
 /* Logo blanc centré dans le hero */
 .hero-logo {
-  height: 3cm;
+  height: 4.5cm;
   width: auto;
   margin: 0 auto var(--space-md);
   /* Filtre pour forcer la plume (souvent noire) en blanc dans le hero */
