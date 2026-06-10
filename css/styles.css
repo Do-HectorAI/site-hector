@@ -547,7 +547,7 @@ button:focus-visible {
 .hero-content {
   position: relative;
   z-index: 3;
-  max-width: 820px;
+  max-width: 960px;
   padding-inline: var(--container-pad);
 }
 
@@ -571,9 +571,19 @@ button:focus-visible {
 }
 
 .hero h1 {
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(2rem, 4.8vw, 3.6rem);
   font-weight: 700;
   margin-bottom: var(--space-md);
+}
+/* Chaque phrase du titre reste sur une seule ligne (pas de coupure interne) */
+.hero h1 span {
+  white-space: nowrap;
+}
+/* Sur très petit écran, on autorise le retour à la ligne pour éviter le débordement */
+@media (max-width: 480px) {
+  .hero h1 span {
+    white-space: normal;
+  }
 }
 
 .hero-subtitle {
