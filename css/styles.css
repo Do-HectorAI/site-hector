@@ -917,7 +917,11 @@ button:focus-visible {
   max-width: 1100px;
   height: auto;
   margin: 0 auto;
-  /* "hector" affiché dans sa couleur d'origine (noir) sur fond blanc */
+  /* "hector" affiché dans sa couleur d'origine (noir) sur fond beige clair */
+}
+/* Apparition plus lente et progressive du "hector" au scroll */
+.cta-wordmark[data-reveal] {
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
