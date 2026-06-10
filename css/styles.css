@@ -354,6 +354,10 @@ button:focus-visible {
   width: auto;
   transition: filter var(--transition-fast);
 }
+/* Sur l'accueil, le bandeau affiche le mot "hector" seul : on le réduit */
+.site-header--transparent .header-logo img {
+  height: 40px;
+}
 /* Repli texte si le logo SVG n'est pas encore fourni */
 .header-logo .logo-text {
   font-family: var(--font-title);
