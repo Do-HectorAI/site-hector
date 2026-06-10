@@ -23,36 +23,32 @@
 const VIDEO_SOURCES = {
   /* Axe 1 : Rédaction d'acte */
   "redaction-1": "assets/video/usecases/redaction-1.mp4", // Rédigez dans votre style
-  "redaction-2": "", // Plan détaillé de l'argumentation
+  "redaction-2": "assets/video/usecases/redaction-2.mp4", // Plan détaillé de l'argumentation
   "redaction-3": "assets/video/usecases/redaction-3.mp4", // Enrichissez vos actes
 
   /* Axe 2 : Analyse de dossier */
   "analyse-1": "assets/video/usecases/analyse-1.mp4", // Maîtrisez vos dossiers volumineux
-  "analyse-2": "", // Faits, parties et tableau des pièces (fusion)
+  "analyse-2": "assets/video/usecases/analyse-2.mp4", // Faits, parties et tableau des pièces (fusion)
   "analyse-3": "assets/video/usecases/analyse-3.mp4", // Trouvez la jurisprudence
 
   /* Axe 3 : Gestion du contentieux */
-  "gestion-1": "", // Structurez votre dossier (renommage auto + scission)
+  "gestion-1": "assets/video/usecases/gestion-1.mp4", // Structurez votre dossier
   "gestion-2": "assets/video/usecases/gestion-2.mp4?v=2", // Numérotez et tamponnez vos pièces
-  "gestion-3": "", // Centralisez et sécurisez vos dossiers
+  "gestion-3": "assets/video/usecases/gestion-3.mp4", // Centralisez et sécurisez vos dossiers
 };
 
 /* --- PHOTOS (images dans assets/img/usecases/) --- */
 const IMAGE_SOURCES = {
-  /* Axe 1 : Rédaction d'acte */
-  "redaction-1": "", // ex : "assets/img/usecases/redaction-1.jpg"
-  "redaction-2": "assets/img/usecases/redaction-2.png",
+  /* Toutes les images ont été remplacées par des vidéos (voir VIDEO_SOURCES). */
+  "redaction-1": "",
+  "redaction-2": "",
   "redaction-3": "",
-
-  /* Axe 2 : Analyse de dossier */
   "analyse-1": "",
-  "analyse-2": "assets/img/usecases/analyse-2.png",
+  "analyse-2": "",
   "analyse-3": "",
-
-  /* Axe 3 : Gestion du contentieux */
-  "gestion-1": "assets/img/usecases/gestion-1.png",
+  "gestion-1": "",
   "gestion-2": "",
-  "gestion-3": "assets/img/usecases/gestion-3.png",
+  "gestion-3": "",
 };
 
 /* --- SEGMENTS À CONSERVER (en secondes : [début, fin]) ---
