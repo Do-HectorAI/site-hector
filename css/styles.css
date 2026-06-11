@@ -1112,6 +1112,31 @@ button:focus-visible {
   font-size: 1.15rem;
 }
 
+/* --- Mise en page d'un axe : 3 points (gauche) + une vidéo en focus (droite) --- */
+.axis-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+/* Les 3 points "en grand" (accordéon réutilisant les classes .faq-*) */
+.axis-points .faq-question {
+  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+}
+.axis-points .faq-answer-inner {
+  font-size: 1.05rem;
+}
+/* La vidéo en focus occupe toute la colonne de droite */
+.axis-focus .usecase-video {
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .axis-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
 /* Un cas d'usage = visuel + corps (numéro/titre/texte) */
 .usecase {
   display: grid;
