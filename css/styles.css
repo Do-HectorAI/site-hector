@@ -61,7 +61,7 @@
   --radius-md: 12px;
 
   /* --- Hauteur du header (sert à compenser le décalage des ancres) --- */
-  --header-height: 96px;
+  --header-height: 64px;
 
   /* --- Transitions douces réutilisées partout --- */
   --transition-fast: 0.2s ease;
