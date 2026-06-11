@@ -429,7 +429,9 @@ button:focus-visible {
 }
 
 .footer-brand .footer-logo img {
-  height: 26px;
+  /* Désormais la plume seule (format vertical), affichée en petit */
+  height: 48px;
+  width: auto;
   margin-bottom: var(--space-sm);
 }
 .footer-brand .logo-text {
