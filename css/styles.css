@@ -965,6 +965,13 @@ button:focus-visible {
 .vision-text p:last-child {
   margin-bottom: 0;
 }
+/* Resserre l'espace entre "Notre vision" et le bloc CTA qui suit (accueil) */
+.vision {
+  padding-bottom: var(--space-lg);
+}
+.vision + .cta {
+  padding-top: var(--space-lg);
+}
 /* Mode temporaire SANS photo : on masque l'emplacement photo et on centre le
    texte. Pour réafficher la photo plus tard, retirez la classe
    "vision--text-only" sur la section <section class="section vision ..."> . */
