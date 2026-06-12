@@ -157,6 +157,12 @@ function initFaqAccordion() {
   const questions = document.querySelectorAll(".faq-question");
   if (questions.length === 0) return;
 
+  // Ferme une question (remet la hauteur à 0).
+  function closeQuestion(q) {
+    q.setAttribute("aria-expanded", "false");
+    if (q.nextElementSibling) q.nextElementSibling.style.maxHeight = null;
+  }
+
   questions.forEach(function (question) {
     question.addEventListener("click", function () {
       const answer = question.nextElementSibling; // la div .faq-answer
@@ -164,9 +170,14 @@ function initFaqAccordion() {
 
       if (isOpen) {
         // Fermeture : on remet la hauteur à 0
-        question.setAttribute("aria-expanded", "false");
-        answer.style.maxHeight = null;
+        closeQuestion(question);
       } else {
+        // Accordéon "à ouverture unique" : dans un groupe .axis-points, ouvrir
+        // un point referme automatiquement les autres (pas besoin de recliquer).
+        const group = question.closest(".axis-points");
+        if (group) {
+          group.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(closeQuestion);
+        }
         // Ouverture : on règle max-height sur la hauteur réelle du contenu
         question.setAttribute("aria-expanded", "true");
         answer.style.maxHeight = answer.scrollHeight + "px";

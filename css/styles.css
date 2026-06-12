@@ -1115,13 +1115,16 @@ button:focus-visible {
 /* --- Mise en page d'un axe : 3 points (gauche) + une vidéo en focus (droite) --- */
 .axis-layout {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  /* Vidéo (droite) nettement plus large pour rester plus haute que les points */
+  grid-template-columns: 1fr 1.5fr;
   gap: var(--space-lg);
   align-items: start;
 }
 /* Les 3 points "en grand" (accordéon réutilisant les classes .faq-*) */
 .axis-points .faq-question {
-  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  /* Espacement vertical resserré pour limiter la hauteur de la colonne */
+  padding-block: var(--space-sm);
 }
 .axis-points .faq-answer-inner {
   font-size: 1.05rem;
